@@ -1,0 +1,16 @@
+class Solution {
+    public int maxProfit(int[] prices) {
+        int buy = prices[0]; //initialize first element as buy
+        int maxProfit = 0;    
+        for (int i = 1; i<prices.length; i++){
+            if(buy>prices[i])      
+        //if current price is less than buy then update
+                buy = prices[i];
+            else if(prices[i] - buy > maxProfit) 
+            
+       //if current prices if gretater than buy then make profit from it
+                maxProfit = prices[i]-buy;
+        }
+        return maxProfit;
+    }
+}
