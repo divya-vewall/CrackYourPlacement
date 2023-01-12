@@ -1,0 +1,36 @@
+public class Solution {
+    public ListNode startingPointOfCycle(ListNode head){
+        //corner case
+        if(head == null || head.next == null) return null;
+        ListNode slow = head;
+        ListNode fast = head;
+        //floyd's cycle concept
+        while(fast != null && fast.next != null){
+            slow = slow.next;
+            fast = fast.next.next;
+
+            if(slow == fast) break;
+        }
+        if(slow != fast) return null;
+        slow = head;
+        fast = fast;
+        while(slow != fast){
+            slow = slow.next;
+            fast = fast.next;
+        }
+        return slow;
+    }
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        //corner case
+        if(headA == null || headB == null) return null;
+        ListNode tail = headA;
+        while(tail.next != null){
+            tail = tail.next;
+        }
+        tail.next = headB;
+        ListNode ans = startingPointOfCycle(headA);
+        tail.next = null;
+
+        return ans;
+    }
+}
